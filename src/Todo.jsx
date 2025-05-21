@@ -16,9 +16,8 @@ function Todo(){
     const [Number,setNumber] = useState(2);
 
     // setNumber(3);
-    // console.log(Number);
-    // setNumber(5);
-    // console.log(Number);
+    // console.log(Number); 
+    // setNumber(5);    
 
     const [todoList, setTodoList] = useState([]);
 
