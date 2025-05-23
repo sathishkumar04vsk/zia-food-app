@@ -4,13 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Todo from './Todo.jsx'
 import AddColor from './AddColor.jsx'
+import Navbar from './components/Navbar.jsx'
+import { Toolbar } from '@mui/material'
+import Footer from './components/Footer.jsx'
 
 function App() {
 
   return (
     <>
-      <Todo />
-      <AddColor />
+      <Navbar />
+      <Footer />
     </>
   )
 }
