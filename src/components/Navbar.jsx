@@ -2,6 +2,7 @@ import { AppBar, Button, Link, List, ListItem, ListItemText, Toolbar } from "@mu
 import React from "react";
 
 const  Navbar = ()=>{
+    const listTextStyle = { whiteSpace: 'nowrap', overflow: 'visable', textOverflow: 'ellipsis' }
     return <AppBar sx={{backgroundColor:"white"}}>
        <Toolbar>
           <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-between"}}>
@@ -9,13 +10,23 @@ const  Navbar = ()=>{
 
               <List sx={{display:"flex", flexWrap:'nowrap', gap:1}}>
                 <ListItem component={Link}>
-                    <ListItemText primary={"About Beast Food"} />
+                    <ListItemText className=" overflow-visible whitespace-nowrap overflow-ellipsis"  primary={"About Beast Food"} />
                     </ListItem>
-                <ListItem component={Link}>Our Business</ListItem>
-                <ListItem component={Link}>Delivery For Everyone</ListItem>
-                <ListItem component={Link}>Newsroom</ListItem>
-                <ListItem component={Link}>Contact</ListItem>
-              </List>
+                <ListItem  component={Link}>
+                    
+                    <ListItemText sx={listTextStyle} primary="Our Business"/>
+                    </ListItem>
+                <ListItem sx={listTextStyle} component={Link}>
+                   
+                    <ListItemText sx={listTextStyle} primary={"Delivery For Everyone"} />
+                    </ListItem>
+                <ListItem component={Link}>
+                    <ListItemText sx={listTextStyle} primary="Newsroom"/>
+                </ListItem>
+                <ListItem component={Link}>
+                    <ListItemText sx={listTextStyle} primary="Contact"/>
+                </ListItem>
+              </List>   
           </div>
         </Toolbar>
     </AppBar>
