@@ -1,26 +1,22 @@
 import { Card, CardContent, CardMedia } from "@mui/material";
 import StarsIcon from "@mui/icons-material/Stars";
-import React, { useContext } from "react";
-import { APPContext } from "../App";
 
-export default function FoodCard  (){
-    const {name, setName} = useContext(APPContext);
-    console.log(name);
-    return <Card>
+export default function FoodCard  ({item}){
+
+    return <Card className=" hover:cursor-pointer hover:shadow-lg !rounded-lg">
                         <CardContent>
-                            <CardMedia component="img" className="h-56 object-fit-cover object-center" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/4/21/f6d8a22a-fd9d-48f5-89fd-44e29bb1b6b1_770772.jpg" alt="pizza" />
+                            <CardMedia component="img" className="h-56 rounded-md object-fit-cover object-center" src={item.food_image} alt={item.food_name} />
                             <div className="py-2">
-                                <h4 className="text-xl font-bold">Pizza Hut</h4>
+                                <h4 className="text-xl font-bold">{item.restorant_name}</h4>
                                 <div className="flex gap-1 py-1">
                                     <StarsIcon className="text-green-700"/>
-                                    <p className="font-semibold">4.6 </p>
-                                    <strong>40-50 mins</strong>
+                                    <p className="font-semibold">{item.rating} </p>
+                                    <strong>{item.expected_delivery}</strong>
                                 </div>
                                 <div className="text-gray-500 font-semibold">
-                                    <p>Pizza </p>
-                                    <p>Central Bengalore</p>
+                                    <p>{item.food_name} </p>
+                                    <p>{item.location}</p>
                                 </div>
-                                <input className="border px-2" type="text" value={name} onChange={event=>setName(event.target.value)} />
                             </div>
                         </CardContent>
                 </Card>
