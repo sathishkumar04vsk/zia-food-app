@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FoodCard from "./FoodCard";
 
-export default function FoodList({name, setName}){
+export default function FoodList(){
     const [count, setCount] = useState(1);
     
     // useEffect 
@@ -25,7 +25,7 @@ export default function FoodList({name, setName}){
 
     return <div className="container mt-24 mb-12 mx-auto">
             <div className="grid grid-cols-4">
-                <FoodCard name={name} setName={setName} />
+                <FoodCard />
                 <button onClick={()=> setCount(count+1)}>count</button>
                 {count}
             </div>

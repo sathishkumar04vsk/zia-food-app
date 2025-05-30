@@ -1,8 +1,10 @@
 import { Card, CardContent, CardMedia } from "@mui/material";
 import StarsIcon from "@mui/icons-material/Stars";
-import React from "react";
+import React, { useContext } from "react";
+import { APPContext } from "../App";
 
-export default function FoodCard  ({name, setName}){
+export default function FoodCard  (){
+    const {name, setName} = useContext(APPContext);
     console.log(name);
     return <Card>
                         <CardContent>
