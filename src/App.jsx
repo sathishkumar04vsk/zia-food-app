@@ -7,15 +7,17 @@ import AddColor from './AddColor.jsx'
 import Navbar from './components/Navbar.jsx'
 import { Toolbar } from '@mui/material'
 import Footer from './components/Footer.jsx'
-import FoodList from './components/FoodList.jsx'
+import FoodList from './components/FoodList.jsx';
+
 
 function App() {
-
+ const [name,setName] =useState("Beast Food");
+ console.log(name)
   return (
     <>
-      <Navbar />
-      <FoodList />
-      <Footer />
+      <Navbar name={name} />
+      <FoodList name={name} setName={setName} />
+      <Footer  name={name} />
     </>
   )
 }
