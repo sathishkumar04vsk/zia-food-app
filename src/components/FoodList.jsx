@@ -4,14 +4,30 @@ import { APPContext } from "../App";
 
 export default function FoodList(){
     const [count, setCount] = useState(1);
-    const {FoodDatas} = useContext(APPContext);
     // useEffect 
 
     // useEffect(start,dependency)
     // useEffect (()=>{}, [count])
     // console.log(count)
     // console.log("hello world");
+    const [FoodDatas, setFoodDatas] = useState([]);
 
+    const fetchFood = () => {
+    try {
+      fetch("https://61d2867cda87830017e59561.mockapi.io/foods", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => setFoodDatas(data))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFood();
+  }, []);
     
 
     useEffect(()=>{

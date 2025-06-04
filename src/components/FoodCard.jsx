@@ -2,9 +2,11 @@ import { Button, Card, CardContent, CardMedia } from "@mui/material";
 import StarsIcon from "@mui/icons-material/Stars";
 import { useContext } from "react";
 import { APPContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 export default function FoodCard  ({item}){
     const {setFoodDatas} = useContext(APPContext);
+    const navigate = useNavigate()
     const handleDelete = () => {
             setFoodDatas(prev =>prev.filter((data)=>data.id !=item.id))
     }
@@ -22,7 +24,7 @@ export default function FoodCard  ({item}){
                                     <p>{item.food_name} </p>
                                     <p>{item.location}</p>
                                 </div>
-                                <div className="flex justify-end mt-2"><Button onClick={handleDelete} variant="contained" color="error"  >Delete</Button></div>
+                                <div className="flex justify-between mt-2"><Button onClick={()=>navigate(`/edit/${item.id}`)} variant="outlined">Edit</Button><Button onClick={handleDelete} variant="contained" color="error"  >Delete</Button></div>
                             </div>
                         </CardContent>
                 </Card>
