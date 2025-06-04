@@ -3,8 +3,9 @@ import React, { useContext, useState } from "react";
 import { APPContext } from "../App";
 
 export function AddFood(){
-    const {setFoodDatas}=useContext(APPContext);
+    const {FoodDatas,setFoodDatas}=useContext(APPContext);
     const [formdata, setFormData] = useState({
+            id: FoodDatas.length+1,
             restorant_name:"",
             food_image:"",
             rating:0,
@@ -27,13 +28,16 @@ export function AddFood(){
             setFoodDatas(prev=>([...prev,formdata]))
         }
 
-    return<form  className="max-w-96">
-        <TextField fullWidth onChange={(event)=>setFormData(prev=>({...prev,restorant_name: event.target.value}))} value={formdata.restorant_name} className="!mb-2" id="restorant_name" name="restorant_name" label="Restorant Name" />
-        <TextField fullWidth onChange={handleOnChage} value={formdata.food_image} className="!mb-2" type="url" id="food_image" name="food_image" label="Food Image URL" />
-        <TextField fullWidth onChange={handleOnChage} value={formdata.rating} className="!mb-2" type="number" id="rating" name="rating" label="Rating" />
-        <TextField fullWidth onChange={handleOnChage} value={formdata.food_name} className="!mb-2" id="food_name" name="food_name" label="Food Name" />
-        <TextField fullWidth onChange={handleOnChage} value={formdata.expected_delivery} className="!mb-2" id="expected_delivery" name="expected_delivery" label="Expected Delivery Time (mins)" />
-        <TextField fullWidth onChange={handleOnChage} value={formdata.location} className="!mb-2" id="location" name="location" label="Location" />
-        <Button onClick={handleSubmit} variant="contained">Save</Button>
-    </form>
+    return<div className="my-4 max-w-96 mx-auto">
+        <h1 className="text-xl mb-4">Add Your Restorant Food</h1>
+        <form >
+            <TextField fullWidth onChange={(event)=>setFormData(prev=>({...prev,restorant_name: event.target.value}))} value={formdata.restorant_name} className="!mb-2" id="restorant_name" name="restorant_name" label="Restorant Name" />
+            <TextField fullWidth onChange={handleOnChage} value={formdata.food_image} className="!mb-2" type="url" id="food_image" name="food_image" label="Food Image URL" />
+            <TextField fullWidth onChange={handleOnChage} value={formdata.rating} className="!mb-2" type="number" id="rating" name="rating" label="Rating" />
+            <TextField fullWidth onChange={handleOnChage} value={formdata.food_name} className="!mb-2" id="food_name" name="food_name" label="Food Name" />
+            <TextField fullWidth onChange={handleOnChage} value={formdata.expected_delivery} className="!mb-2" id="expected_delivery" name="expected_delivery" label="Expected Delivery Time (mins)" />
+            <TextField fullWidth onChange={handleOnChage} value={formdata.location} className="!mb-2" id="location" name="location" label="Location" />
+            <Button onClick={handleSubmit} variant="contained">Save</Button>
+        </form>
+    </div>
 }
