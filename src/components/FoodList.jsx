@@ -10,7 +10,7 @@ export default function FoodList(){
     // useEffect (()=>{}, [count])
     // console.log(count)
     // console.log("hello world");
-    const [FoodDatas, setFoodDatas] = useState([]);
+    const [FoodDatas, setFoodDatas] = useState(null);
 
     const fetchFood = () => {
     try {
@@ -41,11 +41,11 @@ export default function FoodList(){
     
 
     return <div className="container mt-24 mb-12 mx-auto">
-            <div className="grid grid-cols-4 gap-4">
-                {FoodDatas.map((item, index)=><FoodCard key={index} item={item}/>)}
+            {FoodDatas?<div className="grid grid-cols-4 gap-4">
+                {FoodDatas.map((item, index)=><FoodCard key={index} item={item} fetchFood={fetchFood}/>)}
                 {/* <button onClick={()=> setCount(count+1)}>count</button>
                 {count} */}
-            </div>
+            </div>:<p className="text-center">Loading ...</p>}
     </div>
 };
 
@@ -57,3 +57,4 @@ export default function FoodList(){
 // 3. crtl + f => search
 // 4. crtl + shit + p => emmit wrap <div> </div> 
 
+// fetch(url,{method, headers:{}, body:jsonStringvalue})

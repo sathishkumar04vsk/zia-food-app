@@ -4,10 +4,8 @@ import { APPContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 export function AddFood(){
-    const {FoodDatas,setFoodDatas}=useContext(APPContext);
     const navigate = useNavigate()
     const [formdata, setFormData] = useState({
-            id: FoodDatas.length+1,
             restorant_name:"",
             food_image:"",
             rating:0,
@@ -26,10 +24,21 @@ export function AddFood(){
             //                      food_image: typed value  
         }
 
-        const handleSubmit = ()=>{
-            setFoodDatas(prev=>([...prev,formdata]))
-            navigate('/');
+        const createFood = () =>{
+            try {
+                const payload = JSON.stringify(formdata)
+                fetch("https://61d2867cda87830017e59561.mockapi.io/foods",{method:"POST", headers:{'content-type':'application/json'},body:payload}).then((response)=>response.json()).then((data)=>{console.log(data); navigate('/');}).catch(error=>console.log(error))
+            } catch (error) {
+                console.log(error)
+            }
         }
+
+        const handleSubmit = ()=>{
+            createFood();
+            
+        }
+
+        
 
     return<div className="my-4 max-w-[960px] mx-auto">
         <h1 className="text-2xl mb-8 font-bold text-center">Add Your Restorant Food</h1>
