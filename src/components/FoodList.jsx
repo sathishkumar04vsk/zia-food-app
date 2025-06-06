@@ -12,14 +12,14 @@ export default function FoodList(){
     // console.log("hello world");
     const [FoodDatas, setFoodDatas] = useState(null);
 
-    const fetchFood = () => {
+    const fetchFood = async () => {
     try {
-      fetch("https://61d2867cda87830017e59561.mockapi.io/foods", {
+     const response = await fetch("https://61d2867cda87830017e59561.mockapi.io/foods", {
         method: "GET",
-      })
-        .then((response) => response.json())
-        .then((data) => setFoodDatas(data))
-        .catch((error) => console.log(error));
+      });
+      console.log(response)
+      const data = await response.json();
+      setFoodDatas(data);
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +38,13 @@ export default function FoodList(){
     
 
 
+    const Add = async (a, b) =>{
+      return a + b
+    }
+
+    console.log(Add(20,30));
+  
+    Add(32,43).then(data=>console.log(data));
     
 
     return <div className="container mt-24 mb-12 mx-auto">
