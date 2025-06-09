@@ -1,5 +1,5 @@
 import { AppBar, Button, FormControlLabel, List, ListItem, ListItemText, styled, Switch, Toolbar } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { APPContext } from "../App";
 
@@ -58,6 +58,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     }),
   },
 }));
+
 const  Navbar = ()=>{
     const listTextStyle = { whiteSpace: 'nowrap', overflow: 'visable', textOverflow: 'ellipsis' }
     const navigate = useNavigate();

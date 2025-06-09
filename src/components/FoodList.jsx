@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import FoodCard from "./FoodCard";
 import { APPContext } from "../App";
+import { TextField } from "@mui/material";
 
 export default function FoodList(){
     const [count, setCount] = useState(1);
@@ -10,7 +11,10 @@ export default function FoodList(){
     // useEffect (()=>{}, [count])
     // console.log(count)
     // console.log("hello world");
-    const [FoodDatas, setFoodDatas] = useState(null);
+    const [FoodDatas, setFoodDatas] = useState([]);
+    const [search, setSearch] = useState("");
+    const inputRef = useRef();
+    const divref = useRef();
 
     const fetchFood = async () => {
     try {
@@ -19,22 +23,39 @@ export default function FoodList(){
       });
       console.log(response)
       const data = await response.json();
+      console.log(data);
       setFoodDatas(data);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(search)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // inputRef.current.focus();
+    
     fetchFood();
   }, []);
+
+  useEffect(()=>{
+    divref.current.scrollIntoView({behavior:"smooth"})
+  },[FoodDatas])
+
+  const filterdFoods = useMemo(()=>{
+    if (search !=""){
+    return FoodDatas.filter(food=>food.food_name.toLowerCase().includes(search.toLowerCase()));
+    } else {
+      return FoodDatas
+    }
+  },[search, FoodDatas])
+
     
 
-    useEffect(()=>{
-        console.log(count);
-        console.log("Hello World")
-        setCount(count+1)
-    },[]);//one time callback or initil dom rendering
+    // useLayoutEffect(()=>{
+    //     console.log(count);
+    //     console.log("Hello World")
+    //     setCount(count+1)
+    // },[]);//one time callback or initil dom rendering
     
 
 
@@ -46,13 +67,19 @@ export default function FoodList(){
   
     Add(32,43).then(data=>console.log(data));
     
+    
+
 
     return <div className="container mt-24 mb-12 mx-auto">
+            <input type="text" className="border"  />
+            <TextField  size="small" label="Filter" className="!mb-2" value={search} onChange={event => setSearch(event.target.value)} name='search' />
+              <button onClick={()=>inputRef.current.focus()}>focus</button>
             {FoodDatas?<div className="grid grid-cols-4 gap-4">
-                {FoodDatas.map((item, index)=><FoodCard key={index} item={item} fetchFood={fetchFood}/>)}
+                {filterdFoods.map((item, index)=><FoodCard key={index} item={item} fetchFood={fetchFood}/>)}
                 {/* <button onClick={()=> setCount(count+1)}>count</button>
                 {count} */}
             </div>:<p className="text-center">Loading ...</p>}
+            <div ref={divref}></div>
     </div>
 };
 

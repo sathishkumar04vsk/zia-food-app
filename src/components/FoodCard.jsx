@@ -1,6 +1,6 @@
 import { Button, Card, CardContent, CardMedia } from "@mui/material";
 import StarsIcon from "@mui/icons-material/Stars";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { APPContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +25,8 @@ export default function FoodCard({ item, fetchFood }) {
       console.log(error);
     }
   };
+  
+  
   return (
     <Card className=" hover:cursor-pointer hover:shadow-lg !rounded-lg">
       <CardContent>

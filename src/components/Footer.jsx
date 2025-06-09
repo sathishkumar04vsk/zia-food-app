@@ -1,9 +1,11 @@
 import { Box, Link, List, ListItem } from "@mui/material";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 
 const Footer = () =>{
     const listItemClass = "!text-gray-500 hover:!text-gray-700"
+    
+    
     return <Box >
         <div className="font-mono py-6 border-t left-0 w-full bottom-0">
                 <div className="my-2 container mx-auto">
@@ -33,7 +35,7 @@ const Footer = () =>{
                             </List>
                         </div>
                          <div className="col-span-2 px-4">
-                            <h5 className="px-3 text-lg font-bold" >Available In</h5>
+                            <h5  className="px-3 text-lg font-bold" >Available In</h5>
                             <List>
                                 <ListItem className={listItemClass} component={Link}>Bangalore</ListItem>
                                 <ListItem className={listItemClass} component={Link}>Gurgaon</ListItem>
@@ -49,7 +51,7 @@ const Footer = () =>{
                                 <ListItem className={listItemClass} component={Link}>Explore with Beast Food</ListItem>
                                 <ListItem className={listItemClass} component={Link}>Beast Food News</ListItem>
                                 <ListItem className={listItemClass} component={Link}>Snackables</ListItem>
-                               <h5 className="px-3 text-lg font-bold" >Social Links</h5>
+                               <h5  className="px-3 text-lg font-bold" >Social Links</h5>
                             </List>
                         </div>
                     </div>
