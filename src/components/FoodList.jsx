@@ -37,9 +37,9 @@ export default function FoodList(){
     fetchFood();
   }, []);
 
-  useEffect(()=>{
-    divref.current.scrollIntoView({behavior:"smooth"})
-  },[FoodDatas])
+  // useEffect(()=>{
+  //   divref.current.scrollIntoView({behavior:"smooth"})
+  // },[FoodDatas])
 
   const filterdFoods = useMemo(()=>{
     if (search !=""){
@@ -67,19 +67,19 @@ export default function FoodList(){
   
     Add(32,43).then(data=>console.log(data));
     
-    
+    // useCallback
 
 
     return <div className="container mt-24 mb-12 mx-auto">
-            <input type="text" className="border"  />
+            {/* <input type="text" className="border"  /> */}
             <TextField  size="small" label="Filter" className="!mb-2" value={search} onChange={event => setSearch(event.target.value)} name='search' />
-              <button onClick={()=>inputRef.current.focus()}>focus</button>
+              {/* <button onClick={()=>inputRef.current.focus()}>focus</button> */}
             {FoodDatas?<div className="grid grid-cols-4 gap-4">
                 {filterdFoods.map((item, index)=><FoodCard key={index} item={item} fetchFood={fetchFood}/>)}
                 {/* <button onClick={()=> setCount(count+1)}>count</button>
                 {count} */}
             </div>:<p className="text-center">Loading ...</p>}
-            <div ref={divref}></div>
+            {/* <div ref={divref}></div> */}
     </div>
 };
 

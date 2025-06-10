@@ -80,9 +80,9 @@ const  Navbar = ()=>{
            
                         <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Our Business"/>
                         </ListItem>
-                    <ListItem  component={Link}>
+                    <ListItem to={'/my-todo'} component={Link}>
            
-                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary={"Delivery For Everyone"} />
+                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary={"Todo"} />
                         </ListItem>
                     <ListItem to={'/create'} component={Link}>
                         <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Create"/>

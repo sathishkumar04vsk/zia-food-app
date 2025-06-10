@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useId, useState } from "react";
 import { TodoList } from "./TodoList";
 
 function Todo() {
@@ -31,24 +31,32 @@ function Todo() {
     }
   };
 
-  console.log(todoList)
+  const handleDelete = useCallback((id)=>{
+      setTodoList(prev=>prev.filter((item, index)=>index !==id));
+  },[])
   
+  const id = useId();
   return (
-    <div>
+    <div className=" max-w-3xl mx-auto">
       <h1>Daily Todo</h1>
-      <input
-        value={task}
-        name="todo-list"
-        style={{ height: "40px" }}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <button onClick={handleAddTask} style={{ marginLeft: "5px" }}>
-        Add Task
-      </button>
+      <div className="mt-4">
+        <label htmlFor={id}>Task</label>
+        <input
+          value={task}
+          className="border mr-4 shadow-md rounded-md w-96"
+          id={id}
+          name="todo-list"
+          style={{ height: "40px" }}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button onClick={handleAddTask} style={{ marginLeft: "5px" }}>
+          Add Task
+        </button>
+      </div>
 
       <div style={{ margin: "10px 0" }}>
         {todoList.map((item,index) => (
-          <TodoList key={index} index={index} item={item} setTodoList={setTodoList} />
+          <TodoList key={index} index={index} item={item} setTodoList={setTodoList} handleDelete={handleDelete} />
         ))}
       </div>
     </div>

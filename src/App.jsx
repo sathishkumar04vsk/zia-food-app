@@ -40,6 +40,7 @@ function App() {
             <Route index Component={FoodList} />
             <Route path="create" Component={AddFood} />
             <Route path="edit/:id" Component={UpdateFood} />
+            <Route path="my-todo" Component={Todo} />
           </Routes>
         </div>
         <Footer />
