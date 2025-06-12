@@ -1,4 +1,4 @@
-import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import FoodCard from "./FoodCard";
 import { APPContext } from "../App";
 import { TextField } from "@mui/material";
@@ -37,6 +37,10 @@ export default function FoodList(){
     fetchFood();
   }, []);
 
+  const callFetchFood = useCallback(()=>{
+    fetchFood();
+  },[search])
+
   // useEffect(()=>{
   //   divref.current.scrollIntoView({behavior:"smooth"})
   // },[FoodDatas])
@@ -73,17 +77,21 @@ export default function FoodList(){
     return <div className="container mt-24 mb-12 mx-auto">
             {/* <input type="text" className="border"  /> */}
             <TextField  size="small" label="Filter" className="!mb-2" value={search} onChange={event => setSearch(event.target.value)} name='search' />
-              {/* <button onClick={()=>inputRef.current.focus()}>focus</button> */}
+              {/* <button onClick={()=>divref.current.scrollIntoView({behavior:"smooth"})}>focus</button> */}
             {FoodDatas?<div className="grid grid-cols-4 gap-4">
-                {filterdFoods.map((item, index)=><FoodCard key={index} item={item} fetchFood={fetchFood}/>)}
+                {filterdFoods.map((item, index)=><FoodCard key={index} item={item} fetchFood={callFetchFood}/>)}
                 {/* <button onClick={()=> setCount(count+1)}>count</button>
                 {count} */}
             </div>:<p className="text-center">Loading ...</p>}
-            {/* <div ref={divref}></div> */}
+            {/* <div ref={divref}>Element</div> */}
     </div>
 };
 
+// React LifeCycle
 
+// compoentdidMount => monuntion the component
+// componetdidUpdate => updateing the component
+// componentdidUnMount => deleting the component
 
 
 // 1.alt => making more then one cursor

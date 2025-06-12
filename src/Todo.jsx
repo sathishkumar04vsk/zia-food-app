@@ -38,18 +38,18 @@ function Todo() {
   const id = useId();
   return (
     <div className=" max-w-3xl mx-auto">
-      <h1>Daily Todo</h1>
+      <h1 className="text-center text-3xl font-bold">Daily Todo</h1>
       <div className="mt-4">
-        <label htmlFor={id}>Task</label>
+        <label className="block text-xl font-bold mb-2" htmlFor={id}>Task</label>
         <input
           value={task}
-          className="border mr-4 shadow-md rounded-md w-96"
+          className="border px-2 mr-4 h-12 focus:border-1 focus-visible:!border-1 focus-visible:!border-green-800 focus:border-green-900 hover:border-green-600 shadow-md rounded-md w-full max-w-xl"
           id={id}
           name="todo-list"
-          style={{ height: "40px" }}
+          
           onChange={(e) => setTask(e.target.value)}
         />
-        <button onClick={handleAddTask} style={{ marginLeft: "5px" }}>
+        <button className="bg-green-800 text-white px-6 rounded-md py-3" onClick={handleAddTask} style={{ marginLeft: "5px" }}>
           Add Task
         </button>
       </div>
