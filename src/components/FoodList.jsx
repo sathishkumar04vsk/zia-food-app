@@ -1,12 +1,15 @@
 import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import FoodCard from "./FoodCard";
-import { APPContext } from "../App";
+import { APPContext, updateFood } from "../App";
 import { TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function FoodList(){
-    const [count, setCount] = useState(1);
+    // const [count, setCount] = useState(1);
+    const dispatch = useDispatch();
     // useEffect 
-
+ const count  = useSelector(state=>state.counter.value);
+ console.log(count)
     // useEffect(start,dependency)
     // useEffect (()=>{}, [count])
     // console.log(count)
@@ -23,7 +26,7 @@ export default function FoodList(){
       });
       console.log(response)
       const data = await response.json();
-      console.log(data);
+      dispatch(updateFood(data));
       setFoodDatas(data);
     } catch (error) {
       console.log(error);

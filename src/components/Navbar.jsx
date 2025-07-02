@@ -78,7 +78,7 @@ const  Navbar = ()=>{
                         </ListItem>
                     <ListItem  component={Link}>
            
-                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Our Business"/>
+                        <ListItemText to={'/count'} component={Link} sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Counter"/>
                         </ListItem>
                     <ListItem to={'/my-todo'} component={Link}>
            

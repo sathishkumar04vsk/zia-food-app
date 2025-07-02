@@ -11,6 +11,50 @@ import FoodList from "./components/FoodList.jsx";
 import { Route, Routes } from "react-router-dom";
 import { AddFood } from "./components/AddFood.jsx";
 import UpdateFood from "./components/UpdateFood.jsx";
+import CounterComponent from "./components/Counter.jsx";
+
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+
+
+
+// count state
+const counterSlice =  createSlice({
+  name: "counter",
+  initialState: {value: 0},
+  reducers:{
+    increment: (state) =>{ state.value += 1; },
+    decrement: (state) =>{ state.value -= 1;},
+    incrementByAmount: (state,action) => { state.value += action.payload}
+  }
+})
+
+// count state functions
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+
+const foodListSlice = createSlice({
+  name:"foodlist",
+  initialState: {value: null},
+  reducers:{
+    updateFood: (state,action) =>{state = action.payload}
+  }
+})
+
+export const { updateFood } = foodListSlice.actions
+
+// redux store
+const store = configureStore({
+  reducer:{
+    counter: counterSlice.reducer,
+    foodlist: foodListSlice.reducer,
+  }
+})
+
+
+
+
+
 
 export const APPContext = createContext(null);
 
@@ -31,6 +75,7 @@ function App() {
   
 
   return (
+    <Provider store={store}>
     <APPContext.Provider value={{ FoodDatas, setFoodDatas, mode, setMode }}>
       <ThemeProvider theme={theme}>
       <Paper>
@@ -41,12 +86,14 @@ function App() {
             <Route path="create" Component={AddFood} />
             <Route path="edit/:id" Component={UpdateFood} />
             <Route path="my-todo" Component={Todo} />
+            <Route path="count" Component={CounterComponent} />
           </Routes>
         </div>
         <Footer />
       </Paper>
       </ThemeProvider>
     </APPContext.Provider>
+    </Provider>
   );
 }
 
