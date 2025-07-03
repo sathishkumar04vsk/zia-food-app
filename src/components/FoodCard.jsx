@@ -10,8 +10,8 @@ export default function FoodCard({ item, fetchFood }) {
   const handleDelete = () => {
     try {
       // true , false
-      if (confirm(`Are you sure to delete ${item.food_name}`) == true) {
-        fetch(`https://61d2867cda87830017e59561.mockapi.io/foods/${item.id}`, {
+      if (confirm(`Are you sure to delete ${item.name}`) == true) {
+        fetch(`${import.meta.env.VITE_API_URL}/foods/${item._id}`, {
           method: "DELETE",
         })
           .then((response) => response.json())
@@ -33,23 +33,30 @@ export default function FoodCard({ item, fetchFood }) {
         <CardMedia
           component="img"
           className="h-56 rounded-md object-fit-cover object-center"
-          src={item.food_image}
-          alt={item.food_name}
+          src={item.image}
+          alt={item.name}
         />
         <div className="py-2">
-          <h4 className="text-xl font-bold">{item.restorant_name}</h4>
-          <div className="flex gap-1 py-1">
-            <StarsIcon className="text-green-700" />
-            <p className="font-semibold">{item.rating} </p>
-            <strong>{item.expected_delivery}</strong>
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="text-xl font-bold">{item.restorant_name}</h4>
+              <div className="flex gap-1 py-1">
+                <StarsIcon className="text-green-700" />
+                <p className="font-semibold">{item.rating} </p>
+                <strong>{item.expected_delivery_time}</strong>
+              </div>
+            </div>
+            <div className="text-gray-600 font-semibold">
+              <p>₹ {item.price}</p>
+            </div>
           </div>
           <div className="text-gray-500 font-semibold">
-            <p>{item.food_name} </p>
+            <p>{item.name} </p>
             <p>{item.location}</p>
           </div>
           <div className="flex justify-between mt-2">
             <Button
-              onClick={() => navigate(`/edit/${item.id}`)}
+              onClick={() => navigate(`/edit/${item._id}`)}
               variant="outlined"
             >
               Edit

@@ -21,7 +21,7 @@ export default function FoodList(){
 
     const fetchFood = async () => {
     try {
-     const response = await fetch("https://61d2867cda87830017e59561.mockapi.io/foods", {
+     const response = await fetch(`${import.meta.env.VITE_API_URL}/foods`, {
         method: "GET",
       });
       console.log(response)

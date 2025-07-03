@@ -11,7 +11,7 @@ export default function UpdateFood() {
  
   const fetchFood = () => {
     try {
-      fetch(`https://61d2867cda87830017e59561.mockapi.io/foods/${id}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/foods/${id}`, {
         method: "GET",
       })
         .then((response) => response.json())
@@ -54,7 +54,7 @@ const FromComponent  = ({initialValues}) =>{
    const updateFood = (values) => {
     try {
       const paylod = JSON.stringify(values);
-      fetch(`https://61d2867cda87830017e59561.mockapi.io/foods/${id}`, {
+      fetch(`${import.meta.env.VITE_API_URL}/foods/${id}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: paylod,
@@ -95,19 +95,34 @@ const FromComponent  = ({initialValues}) =>{
             fullWidth
             onBlur={handleBlur}
             onChange={handleChange}
-            value={values.food_image}
-            error={errors.food_image &&touched.food_image}
+            value={values.image}
+            error={errors.image &&touched.image}
             helperText={
-             errors.food_image &&
-             touched.food_image &&
-             errors.food_image
+             errors.image &&
+             touched.image &&
+             errors.image
             }
             className="!mb-2"
             type="url"
-            id="food_image"
-            name="food_image"
+            id="image"
+            name="image"
             label="Food Image URL"
           />
+          <TextField
+                    fullWidth
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    error={formik.errors.price && formik.touched.price}
+                    helperText={
+                      formik.errors.price && formik.touched.price && formik.errors.price
+                    }
+                    value={formik.values.price}
+                    className="!mb-2"
+                    type="number"
+                    id="price"
+                    name="price"
+                    label="Price"
+                  />
           <TextField
             fullWidth
             onBlur={handleBlur}
@@ -129,35 +144,35 @@ const FromComponent  = ({initialValues}) =>{
             fullWidth
             onBlur={handleBlur}
             onChange={handleChange}
-            value={values.food_name}
-            error={errors.food_name &&touched.food_name}
+            value={values.name}
+            error={errors.name &&touched.name}
             helperText={
-             errors.food_name &&
-             touched.food_name &&
-             errors.food_name
+             errors.name &&
+             touched.name &&
+             errors.name
             }
             className="!mb-2"
-            id="food_name"
-            name="food_name"
+            id="name"
+            name="name"
             label="Food Name"
           />
           <TextField
             fullWidth
             onBlur={handleBlur}
             onChange={handleChange}
-            value={values.expected_delivery}
+            value={values.expected_delivery_time}
             error={
-             errors.expected_delivery &&
-             touched.expected_delivery
+             errors.expected_delivery_time &&
+             touched.expected_delivery_time
             }
             helperText={
-             errors.expected_delivery &&
-              touched.expected_delivery &&
-              errors.expected_delivery
+             errors.expected_delivery_time &&
+              touched.expected_delivery_time &&
+              errors.expected_delivery_time
             }
             className="!mb-2"
-            id="expected_delivery"
-            name="expected_delivery"
+            id="expected_delivery_time"
+            name="expected_delivery_time"
             label="Expected Delivery Time (mins)"
           />
           <TextField
