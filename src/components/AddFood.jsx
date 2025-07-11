@@ -21,7 +21,7 @@ export const ValidationSchema = Yup.object({
 
 export function AddFood() {
   const navigate = useNavigate();
- 
+  const { token } = useContext(APPContext);
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +46,7 @@ export function AddFood() {
       const payload = JSON.stringify(values);
       fetch(`${import.meta.env.VITE_API_URL}/foods`, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", 'Authorization':`Bearer ${token}` },
         body: payload,
       })
         .then((response) => response.json())

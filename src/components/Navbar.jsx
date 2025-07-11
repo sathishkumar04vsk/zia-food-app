@@ -62,8 +62,16 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 const  Navbar = ()=>{
     const listTextStyle = { whiteSpace: 'nowrap', overflow: 'visable', textOverflow: 'ellipsis' }
     const navigate = useNavigate();
-    const {mode, setMode} = useContext(APPContext);
+    const { mode, setMode, token, handleSetToken} = useContext(APPContext);
     const itemColor = {color:mode==='light'?'#374151':''};
+    
+     const logout = () =>{
+        handleSetToken(null);
+        localStorage.removeItem('auth-token');
+        navigate('/login')
+        
+      }
+    
     return <AppBar sx={{backgroundColor:mode==="light"?"white":''}}>
        <div className="container mx-auto">
            <Toolbar>
@@ -86,9 +94,12 @@ const  Navbar = ()=>{
                     <ListItem to={'/create'} component={Link}>
                         <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Create"/>
                     </ListItem>
-                    <ListItem component={Link}>
-                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary="Contact"/>
+                    {token?<ListItem onClick={logout} component={Link}>
+                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary={"Logout"}/>
                     </ListItem>
+                    :<ListItem to={'/login'} component={Link}>
+                        <ListItemText sx={itemColor} className="overflow-visible whitespace-nowrap overflow-ellipsis hover:!text-red-700 !font-bold" primary={"Login"}/>
+                    </ListItem>}
                     <FormControlLabel value={mode} onClick={()=>setMode(prev=>prev==='light'?"dark":"light")} control={<MaterialUISwitch sx={{ m: 1 }} />} />
                     
                    

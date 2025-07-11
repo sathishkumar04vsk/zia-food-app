@@ -5,7 +5,7 @@ import { APPContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
 export default function FoodCard({ item, fetchFood }) {
-  const { setFoodDatas } = useContext(APPContext);
+  const { token } = useContext(APPContext);
   const navigate = useNavigate();
   const handleDelete = () => {
     try {
@@ -13,6 +13,9 @@ export default function FoodCard({ item, fetchFood }) {
       if (confirm(`Are you sure to delete ${item.name}`) == true) {
         fetch(`${import.meta.env.VITE_API_URL}/foods/${item._id}`, {
           method: "DELETE",
+          headers:{
+            'Authorization': `Bearer ${token}`
+          }
         })
           .then((response) => response.json())
           .then((data) => {

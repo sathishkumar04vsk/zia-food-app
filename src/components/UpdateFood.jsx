@@ -8,11 +8,15 @@ import { ValidationSchema } from "./AddFood";
 export default function UpdateFood() {
   const { id } = useParams();
   const [formdata, setFormData] = useState(null);
+  const { token } = useContext(APPContext)
  
   const fetchFood = () => {
     try {
       fetch(`${import.meta.env.VITE_API_URL}/foods/${id}`, {
         method: "GET",
+        headers: {
+          'Authorization':`Bearer ${token}`
+        }
       })
         .then((response) => response.json())
         .then((data) => setFormData(data))
@@ -42,6 +46,7 @@ export default function UpdateFood() {
 
 
 const FromComponent  = ({initialValues}) =>{
+  const { token } = useContext(APPContext)
   const navigate = useNavigate();
   const { id } = useParams();
   const formik = useFormik({
@@ -56,7 +61,7 @@ const FromComponent  = ({initialValues}) =>{
       const paylod = JSON.stringify(values);
       fetch(`${import.meta.env.VITE_API_URL}/foods/${id}`, {
         method: "PUT",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", 'Authorization':`Bearer ${token}` },
         body: paylod,
       })
         .then((response) => response.json())

@@ -18,11 +18,14 @@ export default function FoodList(){
     const [search, setSearch] = useState("");
     const inputRef = useRef();
     const divref = useRef();
-
+    const {token} = useContext(APPContext);
     const fetchFood = async () => {
     try {
      const response = await fetch(`${import.meta.env.VITE_API_URL}/foods`, {
         method: "GET",
+        headers: {
+          'Authorization':`Bearer ${token}`
+        }
       });
       console.log(response)
       const data = await response.json();
