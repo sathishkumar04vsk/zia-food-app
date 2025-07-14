@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Todo from "./Todo.jsx";
 import AddColor from "./AddColor.jsx";
 import Navbar from "./components/Navbar.jsx";
-import { Box, createTheme, Paper, ThemeProvider, Toolbar } from "@mui/material";
+import { Alert, Box, createTheme, Paper, Snackbar, ThemeProvider, Toolbar } from "@mui/material";
 import Footer from "./components/Footer.jsx";
 import FoodList from "./components/FoodList.jsx";
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
@@ -62,6 +62,7 @@ export const APPContext = createContext(null);
 
 function App() {
   const [FoodDatas, setFoodDatas] = useState([]);
+  const [alertMesssage,setAlertMessage] = useState({open: false, severity:"success", message:""});
   const [mode, setMode] = useState("light");
 
   // localStoage.setItem('key', value)
@@ -86,10 +87,31 @@ function App() {
     },
   });
 
+  const handleClose = () =>{
+    setAlertMessage(prev=>({...prev, open:false}))
+  }
+
+  const { open, severity, message } = alertMesssage;
+
+  useLayoutEffect(()=>{
+    setTimeout(()=>handleClose(), 6000)
+  }, [open])
+
+
+  
+
   return (
     <Provider store={store}>
-      <APPContext.Provider value={{ FoodDatas, setFoodDatas, mode, setMode, token, handleSetToken }}>
+      <APPContext.Provider value={{ FoodDatas, setFoodDatas, mode, setMode, token, handleSetToken, setAlertMessage }}>
         <ThemeProvider theme={theme}>
+          <Snackbar
+              anchorOrigin={{vertical:"top", horizontal:"right"}}
+              open = {open}
+              onClose={handleClose}
+              
+           >
+            <Alert variant="filled" severity={severity} onClose={handleClose} >{message}</Alert>
+           </Snackbar>
           <Routes>
             <Route path="/" element={<Layout />} >
                   <Route index element={<FoodList />} />

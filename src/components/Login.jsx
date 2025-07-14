@@ -11,7 +11,7 @@ const ValidationSchema = Yup.object({
 });
 
 export default function Signup() {
-  const { handleSetToken } = useContext(APPContext)
+  const { handleSetToken, setAlertMessage } = useContext(APPContext)
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -33,11 +33,19 @@ export default function Signup() {
             "content-type": "application/json"
         }
       });
+      
       const data = await response.json();
-      handleSetToken(data.token)
-      navigate('/')
+      if (!response.ok){
+        throw new Error(data.error)
+      }
+      
+      handleSetToken(data.token);
+      setAlertMessage({open:true, severity:"success",message: data.message})
+      navigate('/');
+      
       console.log(data);
     } catch (error) {
+      setAlertMessage({open:true, severity:"error", message: error.toString()})
       console.log(error);
     }
   };
